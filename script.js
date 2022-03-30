@@ -1,68 +1,44 @@
-const taskContainer = document.querySelector(".container");
-const input = document.querySelector("#task-to-add");
-const button = document.querySelector(".button");
-const completedTasks = document.querySelector("#completed");
-const totalTasks = document.querySelector("#total");
-console.log(totalTasks);
-let newTaskText = "";
-let completedTasksNumber = 0;
-let totalTasksNumber = 0;
+const button = document.querySelector("button");
+const prezdivka = document.querySelector("h2");
 
-const changeTaskStatus = (event) => {
-  // event.target.classList.toggle("done");
-  if (event.target.classList.contains("done")) {
-    event.target.classList.remove("done");
-    completedTasksNumber--;
-    totalTasksNumber--;
-  } else {
-    event.target.classList.add("done");
-    completedTasksNumber++;
-    
-    totalTasksNumber++;
-  }
-  completedTasks.innerHTML = completedTasksNumber;
-  totalTasks.innerHTML = totalTasksNumber;
-};
-
-const removeTask = (event) => {
-  event.target.parentElement.parentElement.remove();
-};
-
-const createNewTask = () => {
-  const task = document.createElement("div");
-  task.innerHTML = `<div class="task">  
-  <div class="checkbox not-done"></div>
-  <p>Úkol</p>
-  <i class="bin far fa-trash-alt"></i>
-</div>`;
-  taskContainer.appendChild(task);
-  task.querySelector("p").innerHTML = newTaskText;
-  const checkbox = task.querySelector(".checkbox");
-  const bin = task.querySelector(".bin");
-  checkbox.onclick = (event) => changeTaskStatus(event);
-  bin.onclick = (event) => {
-    if (confirm("Opravdu chceš úkol smazat?")) {
-      removeTask(event);
-    }
-  };
-  input.value = "";
-};
+const samohlasky = ["a", "e", "i", "o", "u"];
+const souhlasky = [
+  "h",
+  "k",
+  "r",
+  "d",
+  "t",
+  "n",
+  "j",
+  "c",
+  "b",
+  "f",
+  "l",
+  "m",
+  "p",
+  "s",
+  "v",
+  "z",
+];
+const cisla = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 button.onclick = () => {
-  if (newTaskText !== "") {
-    createNewTask();
-  } else {
-    alert("Vyplň políčko!");
-  }
-};
-
-input.onkeyup = (e) => {
-  newTaskText = e.target.value;
-  if (e.keyCode === 13) {
-    if (newTaskText !== "") {
-      createNewTask();
-    } else {
-      alert("Vyplň políčko!");
-    }
-  }
+  let nahodne_cislo = Math.floor(Math.random() * 16);
+  const pismeno1 = souhlasky[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 5);
+  const pismeno2 = samohlasky[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 16);
+  const pismeno3 = souhlasky[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 5);
+  const pismeno4 = samohlasky[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 16);
+  const pismeno5 = souhlasky[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 9);
+  const cislo1 = cisla[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 9);
+  const cislo2 = cisla[nahodne_cislo];
+  nahodne_cislo = Math.floor(Math.random() * 9);
+  const cislo3 = cisla[nahodne_cislo];
+  
+  prezdivka.textContent = pismeno1.toUpperCase()+pismeno2+pismeno3+pismeno4+pismeno5+"_"+cislo1+cislo2+cislo3;
 };
